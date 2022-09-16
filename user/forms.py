@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.hashers import check_password
-from user.models import User
+
 
 User = get_user_model()
 
@@ -36,14 +36,14 @@ class RegisterForm(UserCreationForm):
         )
 
 
+
 class LoginForm(forms.Form):
-    # TODO: 2. login 할 때 form을 활용해주세요
     username = forms.CharField(
-        error_messages={"required": "유저이름을 입력해주세요."},
+        error_messages={"required": "유저이름 입력."},
         label="유저명",
     )
     password = forms.CharField(
-        error_messages={"required": "비밀번호를 입력해주세요."},
+        error_messages={"required": "비밀번호 입력."},
         widget=forms.PasswordInput,
         label="비밀번호",
     )

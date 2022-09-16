@@ -1,12 +1,11 @@
-from django.contrib.auth import get_user_model, login, logout, authenticate
-from django.contrib.auth.decorators import login_required
+
+from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth.forms import AuthenticationForm
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, render
-from django.contrib.auth.forms import AuthenticationForm
+from django.shortcuts import render
+
 from .forms import LoginForm, RegisterForm
-
-
 
 User = get_user_model()
 
@@ -69,23 +68,18 @@ def login_view(request):
 def logout_view(request):
     # TODO: 3. /logout url을 입력하면 로그아웃 후 / 경로로 이동시켜주세요
     logout(request)							
-    return HttpResponseRedirect("/login")
+    return HttpResponseRedirect("/")
 
 
 # TODO: 8. user 목록은 로그인 유저만 접근 가능하게 해주세요
 def user_list_view(request):
-    # TODO: 7. /users 에 user 목록을 출력해주세요
-
     if request.user.is_authenticated is False:
     
         return HttpResponseRedirect("/login")
     else:
-        page=int(request.GET.get("p",1))
+        page=int(request.GET.get('page',1))
         users=User.objects.all().order_by("-id")
 
-
-    
-    # TODO: 9. user 목록은 pagination이 되게 해주세요
     paginator=Paginator(users, 10)
     users=paginator.get_page(page)
     

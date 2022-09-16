@@ -1,8 +1,15 @@
 from django.contrib import admin
 from django.urls import path
 
-from user.views import index, login_view, logout_view, register_view, user_list_view, bs_test
-
+from user.views import (
+    bs_test,
+    index,
+    login_view,
+    logout_view,
+    register_view,
+    user_list_view,
+)
+app_name="url"
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", index, name="index"),
